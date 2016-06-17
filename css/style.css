@@ -1,0 +1,7 @@
+.title_migration{padding-bottom: 6px; border-bottom: 1px solid #000;}
+
+.title_plugin span{border-bottom: 1px solid #000;}
+
+.title_plugin {margin-bottom: 30px !important;text-align: right;}
+
+textarea{width: 100% !important; resize: none !important;height: 400px !important;}
