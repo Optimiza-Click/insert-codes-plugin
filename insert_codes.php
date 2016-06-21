@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 1.0
+Version: 2.0
 Plugin URI: http://www.optimizaclick.com/
 */
 
@@ -17,9 +17,6 @@ function codes_admin_menu()
 {	
 	//SE AÑADE UNA OPCION EN LA BARRA DE ADMINISTRACION
 	add_menu_page ( 'Insert Codes', 'Insert Codes', 'read',  'insert-codes', 'codes_form', "dashicons-chart-line", 80);
-		
-	//ACCION PARA REGISTRAR LAS OPCIONES DEL PLUGIN	
-	add_action( 'admin_init', 'codes_optmizaclick_register_options' );	
 }
 
 //ACCION INICIAL PARA AÑADIR LA OPCION DEL PLUGIN EN EL MENU DE HERRAMIENTAS
@@ -32,53 +29,115 @@ function codes_form()
 ?><div class="wrap">
 
 		<h1 class="title_plugin"><span>Insert Codes Plugin</span></h1>
-				
-		<form method="post" action="options.php">
-				
-		<?php settings_fields( 'insert_codes_options' ); ?>
-		<?php do_settings_sections( 'insert_codes_options' ); ?>
 		
+		<div id="accordions_content">
 		
-		<h3>Elegir página: <select name="page_id" id="page_id">
+		<?php $values = get_option("insert_codes_plugin_data");
 		
-		<?php
+	
+			?>
 			
-		$page_ids =get_all_page_ids();
+			<div class="accordion_full num_xx">
+				<div class="accordion"><i class="dashicons dashicons-menu"></i></div>
+				
+				<div class="panel">
+				
+					<h3>Elegir página: <select name="page_id_xx" id="page_id_xx" class="page_code_id">
+					
+					<option value="0">Todas las páginas</option>
+					
+					<?php
+					
+						$args = array(
+							'sort_order' => 'asc',
+							'sort_column' => 'post_title',
+							'post_type' => 'page',
+							'post_status' => 'publish'
+						); 
+						$pages = get_pages($args); 
 
-		foreach($page_ids as $id)
+						foreach($pages as $page)
+						{
+							echo '<option value="'.$page->ID.'"';
+							
+							if($page->ID == $code["page_id"]) echo " selected "; 
+							
+							echo '>'.$page->post_title.'</option>';
+						} 
+
+					?>		
+					
+					</select> Elegir zona de página: <select id="location_code_xx" name="location_code_xx">
+					
+					<option value="head">Head</option>
+					<option value="body">Body</option>
+					
+					</select></h3>
+					<h3>Código a insertar:</h3>
+					
+					<p><textarea id="insert_code_page_xx" name="insert_code_page_xx" placeholder="Código a insertar..."></textarea></p>
+			
+					<a href="#" class="button_delete" id="del_xx">Eliminar</a>
+				</div>
+			</div>
+			
+			<?php
+		
+		$key = 1;
+		
+		foreach($values as $code)
 		{
-			echo '<option value="'.$id.'"';
-			
-			if($id == get_option("page_id")) echo " selected "; 
-			
-			echo '>'.get_the_title($id).'</option>';
-		} 
+			?>
+			<div class="accordion_full num_<?php echo $key; ?>">
+				<div class="accordion"><i class="dashicons dashicons-menu"></i></div>
+				
+					<div class="panel">
+					
+						<h3>Elegir página: <select name="page_id_<?php echo $key; ?>" id="page_id_<?php echo $key; ?>">
+						
+						<option <?php if($code[0] == 0) echo " selected "; ?> value="0">Todas las páginas</option>
+						
+						<?php
+							
+							foreach($pages as $page)
+							{
+								echo '<option value="'.$page->ID.'"';
+								
+								if($page->ID == $code[0]) echo " selected "; 
+								
+								echo '>'.$page->post_title.'</option>';
+							} 
 
-	?>		
-		</select> - Elegir zona de página: <select id="location_code" name="location_code">
+						?>		
+						
+						</select> - Elegir zona de página: <select id="location_code_<?php echo $key; ?>" name="location_code_<?php echo $key; ?>">
+						
+						<option <?php if($code[1] == "head") echo " selected "; ?> value="head">Head</option>
+						<option <?php if($code[1] == "body") echo " selected "; ?> value="body">Body</option>
+						
+						</select></h3>
+						<h3>Código a insertar:</h3>
+						
+						<p><textarea id="insert_code_page_<?php echo $key; ?>" name="insert_code_page_<?php echo $key; ?>"	placeholder="Código a insertar..."><?php echo stripslashes($code[2]); ?></textarea></p>
+						
+						<a href="#" class="button_delete" id="del_<?php echo $key; ?>">Eliminar</a>
+						
+					</div>
+				</div>
+
+		<?php $key++; } ?>
 		
-		<option <?php if(get_option("location_code") == "head") echo " selected "; ?> value="head">Head</option>
-		<option <?php if(get_option("location_code") == "body") echo " selected "; ?> value="body">Body</option>
+		</div>
+				
+		<input type="hidden" id="url_base" value="<?php echo WP_PLUGIN_URL. '/'.insert_codes_plugin_name.'/'; ?>" />
 		
-		</select></h3>
-		<h3>Código a insertar:</h3>
+		<p><a href="#" id="button_add" class="button button-primary">Nuevo código</a> <a href="#" id="button_save" class="button button-primary">Guardar cambios</a></p>
 		
-		<p><textarea id="insert_code_page" name="insert_code_page"	placeholder="Código a insertar..."><?php echo get_option("insert_code_page"); ?></textarea></p>
-		
-		<?php submit_button(); ?>
 			
-		
+		<div id="messages_plugin"></div>
   </div><?php 
 
 }   
-
-//SE REGISTRAN TODAS LAS OPCIONES DEL PLUGIN PARA QUE SE GUARDEN EN LA TABLA OPTIONS
-function codes_optmizaclick_register_options() 
-{
-	register_setting( 'insert_codes_options', 'page_id' );
-	register_setting( 'insert_codes_options', 'insert_code_page' );
-	register_setting( 'insert_codes_options', 'location_code' );
-}
 
 //ACCION PARA CARGAR ESTILOS EN LA ADMINISTRACION
 add_action('admin_enqueue_scripts', "custom_codes_admin_styles");
@@ -88,18 +147,41 @@ function custom_codes_admin_styles()
 {
 	wp_register_style( 'custom_codes_admin_css', WP_PLUGIN_URL. '/'.insert_codes_plugin_name.'/css/style.css', false, '1.0.0' );
 	wp_enqueue_style( 'custom_codes_admin_css' );
+	
+	wp_enqueue_script( 'codes_script', WP_PLUGIN_URL. '/'.insert_codes_plugin_name.'/js/scripts.js', array('jquery') );
 }
 
-/// FUNCION QUE INSERTA EL CODIGO EN LA PAGINA
-function insert_codes() 
+$original = array("]]&gt");
+$changed = array("]]>");
+
+/// FUNCION QUE INSERTA LOS CODIGOS CREADOS EN EL BODY
+function insert_codes_body() 
 {
-	if(get_the_id() == get_option("page_id"))
-		echo str_replace("]]&gt", "]]>", get_option("insert_code_page"));
+	$values = get_option("insert_codes_plugin_data");
+	
+	foreach($values as $value)
+	{
+		if( $value[1] == "body")
+			if(get_the_id() == $value[0] || $value[0]  == 0)
+				echo stripslashes(str_replace($original, $changed, $value[2]));
+	}	
 }
 
-//ACTION PARA AÑADIR EL CODIGO A LA PAGINA CORRESPONDIENTE
-if(get_option("location_code") == "body" )
-	add_action( 'wp_footer', 'insert_codes' );
-else
-	add_action( 'wp_head', 'insert_codes' );
+add_action( 'wp_footer', 'insert_codes_body' );
+
+/// FUNCION QUE INSERTA LOS CODIGOS CREADOS EN EL HEAD
+function insert_codes_head() 
+{
+	$values = get_option("insert_codes_plugin_data");
+	
+	foreach($values as $value)
+	{
+		if( $value[1] != "body")
+			if(get_the_id() == $value[0] || $value[0]  == 0)
+				echo stripslashes(str_replace($original, $changed, $value[2]));
+	}	
+}
+
+add_action( 'wp_head', 'insert_codes_head' );
+
 ?>
