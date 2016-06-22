@@ -5,11 +5,11 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 2.0
+Version: 2.1
 Plugin URI: http://www.optimizaclick.com/
 */
 
-define("insert_codes_plugin_name", "insert-codes-plugin");
+define("insert_codes_plugin_name", "insert-codes-plugin-master");
 
 
 //FUNCION INICIAL PARA AÑADIR LA OPCION DEL PLUGIN EN EL MENU DE HERRAMIENTAS Y CARGAR OTRAS FUNCIONES
@@ -30,19 +30,20 @@ function codes_form()
 
 		<h1 class="title_plugin"><span>Insert Codes Plugin</span></h1>
 		
+		<p class="menu_plugin"><i id="button_add" class="dashicons dashicons-plus"></i> <i id="button_save" class="dashicons dashicons-update"></i></p>
+		
 		<div id="accordions_content">
 		
 		<?php $values = get_option("insert_codes_plugin_data");
-		
 	
 			?>
 			
-			<div class="accordion_full num_xx">
+			<div class="accordion_full">
 				<div class="accordion"><i class="dashicons dashicons-menu"></i></div>
 				
-				<div class="panel">
+				<div class="panel show">
 				
-					<h3>Elegir página: <select name="page_id_xx" id="page_id_xx" class="page_code_id">
+					<h3>Elegir página: <select class="page_code_id">
 					
 					<option value="0">Todas las páginas</option>
 					
@@ -67,24 +68,21 @@ function codes_form()
 
 					?>		
 					
-					</select> Elegir zona de página: <select id="location_code_xx" name="location_code_xx">
+					</select> Elegir zona de página: <select class="location_code_page">
 					
 					<option value="head">Head</option>
 					<option value="body">Body</option>
 					
 					</select></h3>
-					<h3>Código a insertar:</h3>
-					
-					<p><textarea id="insert_code_page_xx" name="insert_code_page_xx" placeholder="Código a insertar..."></textarea></p>
+				
+					<p><textarea class="insert_code_page" placeholder="Código a insertar..."></textarea></p>
 			
-					<a href="#" class="button_delete" id="del_xx">Eliminar</a>
+					<i class="button_delete dashicons dashicons-no"></i>
 				</div>
 			</div>
 			
 			<?php
-		
-		$key = 1;
-		
+				
 		foreach($values as $code)
 		{
 			?>
@@ -93,7 +91,7 @@ function codes_form()
 				
 					<div class="panel">
 					
-						<h3>Elegir página: <select name="page_id_<?php echo $key; ?>" id="page_id_<?php echo $key; ?>">
+						<h3>Elegir página: <select class="page_code_id">
 						
 						<option <?php if($code[0] == 0) echo " selected "; ?> value="0">Todas las páginas</option>
 						
@@ -110,30 +108,26 @@ function codes_form()
 
 						?>		
 						
-						</select> - Elegir zona de página: <select id="location_code_<?php echo $key; ?>" name="location_code_<?php echo $key; ?>">
+						</select> Elegir zona de página: <select class="location_code_page">
 						
 						<option <?php if($code[1] == "head") echo " selected "; ?> value="head">Head</option>
 						<option <?php if($code[1] == "body") echo " selected "; ?> value="body">Body</option>
 						
 						</select></h3>
-						<h3>Código a insertar:</h3>
 						
-						<p><textarea id="insert_code_page_<?php echo $key; ?>" name="insert_code_page_<?php echo $key; ?>"	placeholder="Código a insertar..."><?php echo stripslashes($code[2]); ?></textarea></p>
+						<p><textarea class="insert_code_page"	placeholder="Código a insertar..."><?php echo stripslashes($code[2]); ?></textarea></p>
 						
-						<a href="#" class="button_delete" id="del_<?php echo $key; ?>">Eliminar</a>
+						<i class="button_delete dashicons dashicons-no"></i>
 						
 					</div>
 				</div>
 
-		<?php $key++; } ?>
+		<?php } ?>
 		
 		</div>
 				
 		<input type="hidden" id="url_base" value="<?php echo WP_PLUGIN_URL. '/'.insert_codes_plugin_name.'/'; ?>" />
-		
-		<p><a href="#" id="button_add" class="button button-primary">Nuevo código</a> <a href="#" id="button_save" class="button button-primary">Guardar cambios</a></p>
-		
-			
+				
 		<div id="messages_plugin"></div>
   </div><?php 
 
@@ -151,20 +145,10 @@ function custom_codes_admin_styles()
 	wp_enqueue_script( 'codes_script', WP_PLUGIN_URL. '/'.insert_codes_plugin_name.'/js/scripts.js', array('jquery') );
 }
 
-$original = array("]]&gt");
-$changed = array("]]>");
-
 /// FUNCION QUE INSERTA LOS CODIGOS CREADOS EN EL BODY
 function insert_codes_body() 
 {
-	$values = get_option("insert_codes_plugin_data");
-	
-	foreach($values as $value)
-	{
-		if( $value[1] == "body")
-			if(get_the_id() == $value[0] || $value[0]  == 0)
-				echo stripslashes(str_replace($original, $changed, $value[2]));
-	}	
+	load_codes("body");
 }
 
 add_action( 'wp_footer', 'insert_codes_body' );
@@ -172,16 +156,25 @@ add_action( 'wp_footer', 'insert_codes_body' );
 /// FUNCION QUE INSERTA LOS CODIGOS CREADOS EN EL HEAD
 function insert_codes_head() 
 {
+	load_codes("head");
+}
+
+add_action( 'wp_head', 'insert_codes_head' );
+
+$original = array("]]&gt");
+$changed = array("]]>");
+
+/// FUNCION QUE INSERTA LOS CODIGOS
+function load_codes($zone)
+{
 	$values = get_option("insert_codes_plugin_data");
 	
 	foreach($values as $value)
 	{
-		if( $value[1] != "body")
+		if( $value[1] == $zone)
 			if(get_the_id() == $value[0] || $value[0]  == 0)
 				echo stripslashes(str_replace($original, $changed, $value[2]));
 	}	
 }
-
-add_action( 'wp_head', 'insert_codes_head' );
 
 ?>

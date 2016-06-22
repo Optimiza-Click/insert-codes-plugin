@@ -1,21 +1,21 @@
 ﻿jQuery(document).ready(function($)
 {
-	//BOTON PARA CREAR PAGINA DE AVISO LEGAL
+	//BOTON PARA GUARDAR TODOS LOS CODIGOS GENERADOS
 	jQuery("#button_save").click(function()
 	{	
-		var values = new Array(jQuery(".accordion").length);
+		var values = new Array(jQuery(".accordion_full").length - 1);
 
-		var x = 0;
+		var acor = jQuery(".accordion_full").slice(1);
 		
-		var acor = jQuery(".accordion");
+		var x = 0;
 
 		acor.each(function(){
 				
 			code = new Array(3);
 			
-			code[0] = jQuery("#page_id_"+ x +" option:selected").val();
-			code[1] = jQuery("#location_code_"+ x +" option:selected").val();
-			code[2] = jQuery("#insert_code_page_"+ x).val();
+			code[0] = jQuery(this).find(".page_code_id option:selected").val();
+			code[1] = jQuery(this).find(".location_code_page option:selected").val();
+			code[2] = jQuery(this).find(".insert_code_page").val();
 			
 			values[x] = code;
 			
@@ -35,16 +35,18 @@
 		});
 	});
 	
+	//BOTON PARA AÑADIR UN NUEVO DESPLEGABLE PARA INSERTAR UN CODIGO NUEVO
 	jQuery("#button_add").click(function()
 	{	
-		var contenido = "<div class='accordion_full num_xx'>" +jQuery(".accordion_full").first().html() + "</div>";
+		var contenido = "<div class='accordion_full'>" +jQuery(".accordion_full").first().html() + "</div>";
 		
-		jQuery("#accordions_content").append(replaceAll(contenido, "_xx", "_"+ jQuery(".accordion").length));
+		jQuery("#accordions_content").append(contenido);
 		
 		load_accordions();
 
 	});
 	
+	//FUNCION PARA REEMPLAZAR TODAS LAS OCURRENCIAS EN UNA CADENA
 	function replaceAll( html, busca, reemplaza )
 	{
 		while (html.indexOf(busca) != -1)
@@ -53,6 +55,7 @@
 		return html;
 	}
 		
+	// FUNCION PARA MOSTRAR LOS MENSAJES EN LA PAGINA DEL PLUGIN
 	function view_messages(msg)
 	{
 		jQuery("#messages_plugin").empty();
@@ -61,6 +64,7 @@
 		jQuery("#messages_plugin").fadeOut(8000);
 	}
 	
+	//FUNCION PARA CARGAR TODOS LOS ACORDEONES
 	function load_accordions()
 	{
 		var accordions = jQuery(".accordion");

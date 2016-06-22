@@ -2,15 +2,17 @@
 
 .title_plugin span{border-bottom: 1px solid #000;}
 
-.title_plugin {margin-bottom: 30px !important;text-align: right;}
+.title_plugin {margin-bottom: 30px !important;right: 20px;position: absolute; top: 8px;}
 
 .wrap textarea{width: 100% !important; resize: none !important;height: 100px !important;}
 
 #messages_plugin{background-color: #00B2DB; color: #fff; padding: 20px 50px;display: none;}
 
+.menu_plugin{padding: 15px 0px 10px;}
+
  /* Style the buttons that are used to open and close the accordion panel */
 div.accordion {
-    background-color: #eee;
+    background-color: #C52026;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -22,9 +24,11 @@ div.accordion {
 	
 }
 
+div.accordion .dashicons-menu{color: #fff !important;}
+
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 div.accordion.active, div.accordion:hover {
-    background-color: #ddd;
+    background-color: #01AFD6;
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -58,7 +62,7 @@ div.panel.show {
 div.accordion:after {
     content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
-    color: #777;
+    color: #fff;
     float: right;
     margin-left: 5px;
 }
@@ -69,6 +73,16 @@ div.accordion.active:after {
 
 .accordion_full{margin-bottom: 8px;}
 
+.button_delete{font-size: 32px; color: #C52026; padding-bottom: 5px; float: right;}
+
+#button_add{font-size: 32px; color: #01AFD6; padding: 0px 6px;}
+
+#button_save{font-size: 32px; color: #82be00;padding: 0px 6px; }
+
+.dashicons{cursor: pointer !important; }
+
 .num_xx{display: none;}
 
 #accordions_content{padding: 10px 50px 0px 0px;}
+
+#accordions_content .accordion_full:first-child {display: none;}
