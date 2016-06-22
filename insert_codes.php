@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 2.2
+Version: 2.3
 Plugin URI: http://www.optimizaclick.com/
 */
 
@@ -68,7 +68,7 @@ function codes_form()
 
 					?>		
 					
-					</select> Cargar código en: <select class="location_code_page">
+					</select> <span class="text_h3">Cargar código en:</span> <select class="location_code_page">
 					
 					<option value="head">Head</option>
 					<option value="body">Body</option>
@@ -108,7 +108,7 @@ function codes_form()
 
 						?>		
 						
-						</select> Cargar código en: <select class="location_code_page">
+						</select> <span class="text_h3">Cargar código en:</a> <select class="location_code_page">
 						
 						<option <?php if($code[1] == "head") echo " selected "; ?> value="head">Head</option>
 						<option <?php if($code[1] == "body") echo " selected "; ?> value="body">Body</option>
