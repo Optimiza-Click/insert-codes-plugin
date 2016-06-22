@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 2.3
+Version: 2.4
 Plugin URI: http://www.optimizaclick.com/
 */
 
@@ -16,7 +16,7 @@ define("insert_codes_plugin_name", "insert-codes-plugin-master");
 function codes_admin_menu() 
 {	
 	//SE AÑADE UNA OPCION EN LA BARRA DE ADMINISTRACION
-	add_menu_page ( 'Insert Codes', 'Insert Codes', 'read',  'insert-codes', 'codes_form', "dashicons-chart-line", 80);
+	add_menu_page ( 'Insert Codes', 'Insert Codes', 'read',  'insert-codes', 'codes_form', "dashicons-media-code", 80);
 }
 
 //ACCION INICIAL PARA AÑADIR LA OPCION DEL PLUGIN EN EL MENU DE HERRAMIENTAS
@@ -28,9 +28,9 @@ function codes_form()
 {
 ?><div class="wrap_insert_codes_plugin">
 
-		<h1 class="insert_code_title_plugin"><span>Insert Codes Plugin</span></h1>
+		<h1 class="insert_code_title_plugin"><i class="dashicons dashicons-media-code icon_title"></i> <span>Insert Codes</span></h1>
 		
-		<p class="menu_plugin"><i id="button_add" class="dashicons dashicons-plus"></i> <i id="button_save" class="dashicons dashicons-update"></i></p>
+		<p class="menu_plugin"><i id="button_add" class="dashicons dashicons-plus"></i> <i id="button_empty" class="dashicons dashicons-trash"></i> <i id="button_save" class="dashicons dashicons-update"></i></p>
 		
 		<div id="accordions_content">
 		

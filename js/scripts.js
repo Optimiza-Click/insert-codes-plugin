@@ -45,6 +45,15 @@
 		load_accordions();
 
 	});
+	
+	//BOTON PARA ELIMINAR TODOS LOS CODIGOS GENERADOS
+	jQuery("#button_empty").click(function()
+	{	
+		if(confirm("¿Eliminar todos los códigos?"))
+		{
+			jQuery(".accordion_full").slice(1).remove();
+		}
+	});
 		
 	// FUNCION PARA MOSTRAR LOS MENSAJES EN LA PAGINA DEL PLUGIN
 	function view_messages(msg)
