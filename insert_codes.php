@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 2.1
+Version: 2.2
 Plugin URI: http://www.optimizaclick.com/
 */
 
@@ -26,9 +26,9 @@ add_action( 'admin_menu', 'codes_admin_menu' );
 //FUNCION PARA MOSTRAR LAS OPCIONES DEL PLUGIN
 function codes_form()
 {
-?><div class="wrap">
+?><div class="wrap_insert_codes_plugin">
 
-		<h1 class="title_plugin"><span>Insert Codes Plugin</span></h1>
+		<h1 class="insert_code_title_plugin"><span>Insert Codes Plugin</span></h1>
 		
 		<p class="menu_plugin"><i id="button_add" class="dashicons dashicons-plus"></i> <i id="button_save" class="dashicons dashicons-update"></i></p>
 		
@@ -39,7 +39,7 @@ function codes_form()
 			?>
 			
 			<div class="accordion_full">
-				<div class="accordion"><i class="dashicons dashicons-menu"></i></div>
+				<div class="accordion active"><i class="dashicons dashicons-menu"></i></div>
 				
 				<div class="panel show">
 				
@@ -68,7 +68,7 @@ function codes_form()
 
 					?>		
 					
-					</select> Elegir zona de página: <select class="location_code_page">
+					</select> Cargar código en: <select class="location_code_page">
 					
 					<option value="head">Head</option>
 					<option value="body">Body</option>
@@ -108,7 +108,7 @@ function codes_form()
 
 						?>		
 						
-						</select> Elegir zona de página: <select class="location_code_page">
+						</select> Cargar código en: <select class="location_code_page">
 						
 						<option <?php if($code[1] == "head") echo " selected "; ?> value="head">Head</option>
 						<option <?php if($code[1] == "body") echo " selected "; ?> value="body">Body</option>

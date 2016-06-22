@@ -1,16 +1,14 @@
 .title_migration{padding-bottom: 6px; border-bottom: 1px solid #000;}
 
-.title_plugin span{border-bottom: 1px solid #000;}
+.insert_code_title_plugin span{border-bottom: 1px solid #000;}
 
-.title_plugin {margin-bottom: 30px !important;right: 20px;position: absolute; top: 8px;}
+.insert_code_title_plugin {margin-bottom: 30px !important;right: 20px;position: absolute; top: 8px;}
 
-.wrap textarea{width: 100% !important; resize: none !important;height: 100px !important;}
 
-#messages_plugin{background-color: #00B2DB; color: #fff; padding: 20px 50px;display: none;}
+#messages_plugin{background-color: #00B2DB; color: #fff; padding: 20px 50px; margin: 0px 16px 0px 0px; display: none;}
 
 .menu_plugin{padding: 15px 0px 10px;}
 
- /* Style the buttons that are used to open and close the accordion panel */
 div.accordion {
     background-color: #C52026;
     color: #444;
@@ -21,28 +19,23 @@ div.accordion {
     border: none;
     outline: none;
     transition: 0.4s;
-	
 }
 
 div.accordion .dashicons-menu{color: #fff !important;}
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 div.accordion.active, div.accordion:hover {
     background-color: #01AFD6;
 }
 
-/* Style the accordion panel. Note: hidden by default */
 div.panel {
     padding: 0 18px;
     background-color: white;
     display: none;
 }
 
-/* The "show" class is added to the accordion panel when the user clicks on one of the buttons. This will show the panel content */
 div.panel.show {
     display: block !important;
 }
-
 
 div.panel {
     padding: 0 18px 15px;
@@ -56,24 +49,24 @@ div.panel {
 
 div.panel.show {
     opacity: 1;
-    max-height: 500px; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */
+    max-height: 500px;
 }
 
 div.accordion:after {
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
+    content: '\02795';
+    font-size: 16px;
     color: #fff;
     float: right;
     margin-left: 5px;
 }
 
 div.accordion.active:after {
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    content: "\2796"; 
 }
 
 .accordion_full{margin-bottom: 8px;}
 
-.button_delete{font-size: 32px; color: #C52026; padding-bottom: 5px; float: right;}
+.button_delete{font-size: 32px; color: #C52026; padding: 0px 8px 5px; float: right;}
 
 #button_add{font-size: 32px; color: #01AFD6; padding: 0px 6px;}
 
@@ -86,3 +79,38 @@ div.accordion.active:after {
 #accordions_content{padding: 10px 50px 0px 0px;}
 
 #accordions_content .accordion_full:first-child {display: none;}
+
+.wrap_insert_codes_plugin select{
+	appearance:none;
+	min-width: 20%;
+    -moz-appearance:none; 
+    -webkit-appearance:none; 
+	 background:
+    linear-gradient(45deg, transparent 50%, #fff 50%),
+    linear-gradient(135deg, #fff 50%, transparent 50%),
+    linear-gradient(to right, #c52026, #c52026);
+  background-position:
+    calc(100% - 21px) calc(1em + 2px),
+    calc(100% - 16px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+
+  border: thin solid #c52026;
+  font: 300 1em/100% "Helvetica Neue", Arial, sans-serif;
+  height: 40px;
+
+  border-radius: 0;
+  margin: 0;   
+}
+	
+.wrap_insert_codes_plugin textarea{
+	width: 100% !important; 
+	resize: none !important;
+	height: 100px !important;
+	 border: thin solid #c52026;}
+	 
+.wrap_insert_codes_plugin textarea:focus{background-color: #fbfbfb;}

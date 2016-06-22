@@ -45,15 +45,6 @@
 		load_accordions();
 
 	});
-	
-	//FUNCION PARA REEMPLAZAR TODAS LAS OCURRENCIAS EN UNA CADENA
-	function replaceAll( html, busca, reemplaza )
-	{
-		while (html.indexOf(busca) != -1)
-			html = html.replace(busca,reemplaza);
-
-		return html;
-	}
 		
 	// FUNCION PARA MOSTRAR LOS MENSAJES EN LA PAGINA DEL PLUGIN
 	function view_messages(msg)
@@ -61,7 +52,7 @@
 		jQuery("#messages_plugin").empty();
 		jQuery("#messages_plugin").html(msg);
 		jQuery("#messages_plugin").fadeIn(200);
-		jQuery("#messages_plugin").fadeOut(8000);
+		jQuery("#messages_plugin").fadeOut(5000);
 	}
 	
 	//FUNCION PARA CARGAR TODOS LOS ACORDEONES
