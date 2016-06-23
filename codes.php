@@ -7,10 +7,10 @@ if ( ! function_exists( 'update_option' ) )
 
  //SE GUARDAN LOS DATOS DE LOS CODIGOS GENERADOS PARA LA WEB
 if(update_option("insert_codes_plugin_data", $_REQUEST["values"]))
-	echo "Cambios guardados correctamente.";
+	echo "<span class='message_ok'>Cambios guardados correctamente.</span>";
 else if (get_option("insert_codes_plugin_data") == $_REQUEST["values"])
-	echo "No se han realizado cambios.";
+	echo "<span class='message_no_changes'>No se han realizado cambios.</span>";
 else
-	echo "¡Error al guardar los cambios!";
+	echo "<span class='message_error'>¡Error al guardar los cambios!</span>";
 
 ?>
