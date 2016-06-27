@@ -5,7 +5,10 @@
 	{	
 		jQuery(this).addClass("loading");
 		
-		var values = new Array(jQuery(".accordion_full").length - 1);
+		if(jQuery(".accordion_full").length - 1 > 0)
+			var values = new Array(jQuery(".accordion_full").length - 1);
+		else
+			var values = "";
 
 		var acor = jQuery(".accordion_full").slice(1);
 		
@@ -13,12 +16,14 @@
 
 		acor.each(function(){
 				
-			code = new Array(4);
+			code = new Array(5);
 			
 			code[0] = jQuery(this).find(".page_code_id option:selected").val();
 			code[1] = jQuery(this).find(".location_code_page option:selected").val();
 			code[2] = jQuery(this).find(".insert_code_page").val();
 			code[3] = jQuery(this).find(".input_name_code").val();
+			code[4] = jQuery(this).find(".post_type_id option:selected").val();
+			
 			
 			values[x] = code;
 			
@@ -39,7 +44,7 @@
 
 		});
 	});
-	
+		
 	//BOTON PARA AÑADIR UN NUEVO DESPLEGABLE PARA INSERTAR UN CODIGO NUEVO
 	jQuery("#button_add").click(function()
 	{	
@@ -53,6 +58,32 @@
 		
 		load_accordions();
 
+	});
+	
+	
+	var state_visibility = 0;
+	
+	//BOTON PARA DESPLEGAR/OCULTAR TODOS LOS ACORDEONES
+	jQuery("#button_display").click(function()
+	{	
+		if(state_visibility == 0)
+		{	
+			jQuery(".panel").slice(1).addClass("show");
+			jQuery(".accordion").slice(1).addClass("active");
+			state_visibility = 1;
+			
+			jQuery(this).removeClass("dashicons-visibility");
+			jQuery(this).addClass("dashicons-hidden");
+		}
+		else
+		{
+			jQuery(".panel").slice(1).removeClass("show");
+			jQuery(".accordion").slice(1).removeClass("active");
+			state_visibility = 0;
+			
+			jQuery(this).addClass("dashicons-visibility");
+			jQuery(this).removeClass("dashicons-hidden");
+		}		
 	});
 	
 	//BOTON PARA ELIMINAR TODOS LOS CODIGOS GENERADOS
@@ -88,7 +119,7 @@
 			}
 		}
 		
-		jQuery(".button_delete, .button_duplicate, .input_name_code").unbind();
+		jQuery(".button_delete, .button_duplicate, .input_name_code, .post_type_id").unbind();
 		
 		//SE ASOCIA LA ACCION DE ELIMINAR PARA LOS BOTONES DE BORRAR CODIGO
 		jQuery('.button_delete').each(function()
@@ -124,10 +155,32 @@
 				jQuery("#accordions_content").find(".accordion_full").last().find(".insert_code_page").val(jQuery(this).parent().parent().find(".insert_code_page").val());
 				jQuery("#accordions_content").find(".accordion_full").last().find(".input_name_code").val(jQuery(this).parent().parent().find(".input_name_code").val());
 				jQuery("#accordions_content").find(".accordion_full").last().find(".code_name").val(jQuery(this).parent().parent().find(".code_name").val());
+				jQuery("#accordions_content").find(".accordion_full").last().find(".post_type_id").val(jQuery(this).parent().parent().find(".post_type_id").val());
+				
 				
 				load_accordions();
+			});				
+		});
+		
+		jQuery(".post_type_id").each(function()
+		{
+			jQuery(this).on("change", function()
+			{	
+				var elemento = jQuery(this);
+				
+				var request = jQuery.ajax({
+					  url: jQuery( "#url_base").val() + "codes.php", 
+					  method: "POST",
+					  data: { post_type :  jQuery("option:selected", this).val()  }	
+				});
+					 
+				request.done(function( msg ) 
+				{	
+					elemento.parent().find(".page_code_id").empty();
+					elemento.parent().find(".page_code_id").append(msg);
+				});
 			});
-					
+			
 		});
 		
 	}

@@ -1,8 +1,8 @@
 .insert_code_title_plugin {margin-bottom: 30px !important;right: 30px;position: absolute; top: 15px;}
 
-#messages_plugin {position: absolute;top: 34px; left: 140px; display: none;}
+.wrap_insert_codes_plugin #messages_plugin {position: absolute;top: 34px; left: 170px; display: none;}
 
-#messages_plugin span{color: #fff; padding: 12px 30px; font-weight: bold;}
+.wrap_insert_codes_plugin #messages_plugin span{color: #fff; padding: 12px 30px; font-weight: bold;}
 
 .message_ok{background-color: #00B2DB; }
 
@@ -74,6 +74,10 @@ div.accordion.active:after {
 .button_delete{font-size: 32px; color: #C52026; padding: 0px 8px 5px; float: right;}
 
 .button_duplicate{font-size: 24px;color: #01AFD6; }
+
+
+
+#button_display{font-size: 34px; color: #e8d500; padding: 0px 6px;}
 
 #button_add{font-size: 34px; color: #01AFD6; padding: 0px 6px;}
 
