@@ -4,15 +4,13 @@
 
 .wrap_insert_codes_plugin #messages_plugin span{color: #fff; padding: 12px 30px; font-weight: bold;}
 
-.panel h3{width: 100%; text-align: center;}
-
 .message_ok{background-color: #00B2DB; }
 
 .message_error{background-color: #c52026; }
 
 .message_no_changes{background-color: #e8d500; }
 
-.menu_plugin{padding: 15px 0px 10px;}
+.menu_plugin{padding: 15px 0px 0px;}
 
 .code_name{font-weight: bold; color: #fff; font-size: 17px;padding-left: 10px;}
 
@@ -81,25 +79,43 @@ div.accordion.active:after {
 
 #button_add{font-size: 34px; color: #01AFD6; padding: 0px 6px;}
 
-#button_save{font-size: 32px; height:32px;width: 32px; color: #82be00;padding: 0px 6px; }
+#button_save{height: 28px; width: 28px; color: #82be00; margin-right: -3px; margin-left: 12px; margin-top: 2px; background: url("./icons/disquete-green.svg") no-repeat; background-size: cover;}
+
+.icon-save{height: 16px; width: 16px; color: #000; margin: 2px 2px 0px; background: url("./icons/disquete.svg") no-repeat; background-size: cover;}
 
 #button_empty{font-size: 32px; color: #c52026;padding: 0px 6px; }
+
+#button_help{font-size: 45px; color: #000; position:fixed; padding: 15px 35px 35px 15px; bottom: 0px; right: 10px; background-color: #F1F1F1; }
 
 .icon_title{font-size: 45px;margin-right: 20px;margin-top: -12px;}
 
 .dashicons{cursor: pointer !important; }
 
-.num_xx{display: none;}
-
 #accordions_content{padding: 10px 50px 0px 0px;}
 
 #accordions_content .accordion_full:first-child {display: none;}
+
+#modal_empty{display: none; position: fixed; width: 340px; z-index: 99999; height: 80px; left: 50%; margin-left: -170px; top: 15%;background-color: #fff; border: 2px solid #000; padding: 10px 40px 30px;}
+
+#modal_help{display: none; position: fixed; width: 70%; z-index: 9999; left: 15%; top: 15%;background-color: #fff; border: 2px solid #000; padding: 30px;}
+
+#modal_empty h3{text-align: center;}
+
+#modal_help ul li{list-style: none; padding-left: 30px;}
+
+#hide_help{font-size: 32px; color: #000; position: absolute; top: 10px; right: 20px;}
+
+#confirm_empty, #cancel_empty{text-decoration: none; padding: 10px 25px; color: #fff; font-weight: 600; }
+
+#confirm_empty{background-color: #82be00; float: left;}
+
+#cancel_empty{background-color:  #c52026; float: right; }
 
 .wrap_insert_codes_plugin select{
 	appearance:none;
     -moz-appearance:none; 
     -webkit-appearance:none; 
-	width: 24%;
+	width: 100%;
 	 background:
     linear-gradient(45deg, transparent 50%, #fff 50%),
     linear-gradient(135deg, #fff 50%, transparent 50%),
@@ -111,7 +127,7 @@ div.accordion.active:after {
   background-size:
     5px 5px,
     5px 5px,
-    2.5em 2.5em;
+    3em 3em;
 	background-repeat: no-repeat;
 	border: thin solid #c52026;
 	font: 300 1em/100% "Helvetica Neue", Arial, sans-serif;
@@ -121,6 +137,19 @@ div.accordion.active:after {
 	padding-left: 10px;
 }
 
+.col_1_4{width:24%; margin:0.5%; padding: 10px 0px; float: left;}
+
+@media screen and (max-width: 1100px)
+{
+	.col_1_4{width:48%; margin:1%; padding: 10px 0px; float: left;}
+}
+
+@media screen and (max-width: 760px)
+{
+	.col_1_4{width:98%; margin:1%; padding: 10px 0px; float: left;}
+}
+
+.panel .col_1_4:last-child{margin-right: 0%; }
 
 .input_name_code{
 	appearance:none;
@@ -128,7 +157,7 @@ div.accordion.active:after {
     -webkit-appearance:none; 
 	border: thin solid #c52026 !important;
 	height: 40px !important;
-	width: 24%;
+	width: 100%;
 	padding-left: 10px;
 	box-sizing: border-box;
 }
@@ -142,40 +171,3 @@ div.accordion.active:after {
 .wrap_insert_codes_plugin textarea:focus{background-color: #fbfbfb;}
 
 .text_h3{margin: 0px 12px !important;}
-
-.loading{
-	 -webkit-animation-name: spin;
-    -webkit-animation-duration: 1000ms;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-name: spin;
-    -moz-animation-duration: 1000ms;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -ms-animation-name: spin;
-    -ms-animation-duration: 1000ms;
-    -ms-animation-iteration-count: infinite;
-    -ms-animation-timing-function: linear;
-    -o-transition: rotate(3600deg);
-}
-
-@-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
-}

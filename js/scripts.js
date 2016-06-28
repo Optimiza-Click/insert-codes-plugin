@@ -2,9 +2,7 @@
 {
 	//BOTON PARA GUARDAR TODOS LOS CODIGOS GENERADOS
 	jQuery("#button_save").click(function()
-	{	
-		jQuery(this).addClass("loading");
-		
+	{			
 		if(jQuery(".accordion_full").length - 1 > 0)
 			var values = new Array(jQuery(".accordion_full").length - 1);
 		else
@@ -24,7 +22,6 @@
 			code[3] = jQuery(this).find(".input_name_code").val();
 			code[4] = jQuery(this).find(".post_type_id option:selected").val();
 			
-			
 			values[x] = code;
 			
 			x++;
@@ -37,11 +34,8 @@
 		});
 			 
 		request.done(function( msg ) 
-		{		
-			jQuery("#button_save").removeClass("loading");
-			
+		{					
 			view_messages(msg);
-
 		});
 	});
 		
@@ -59,8 +53,7 @@
 		load_accordions();
 
 	});
-	
-	
+		
 	var state_visibility = 0;
 	
 	//BOTON PARA DESPLEGAR/OCULTAR TODOS LOS ACORDEONES
@@ -86,14 +79,37 @@
 		}		
 	});
 	
-	//BOTON PARA ELIMINAR TODOS LOS CODIGOS GENERADOS
+	//BOTON PARA MOSTAR EL DIALOGO QUE CONFIRMA EL BORRADO DE TODOS LOS CODIGOS GENERADOS
 	jQuery("#button_empty").click(function()
-	{	
-		if(confirm("¿Eliminar todos los códigos?"))
-		{
-			jQuery(".accordion_full").slice(1).remove();
-		}
+	{			
+		jQuery("#modal_empty").fadeIn(400);
 	});
+	
+	//BOTON PARA ELIMINAR TODOS LOS CODIGOS GENERADOS
+	jQuery("#confirm_empty").click(function()
+	{	
+	    jQuery(".accordion_full").slice(1).remove();
+		jQuery("#modal_empty").fadeOut(400);
+	});
+	
+	//BOTON PARA CANCELAR EL BORRRADO DE TODOS LOS CODIGOS GENERADOS
+	jQuery("#cancel_empty").click(function()
+	{	
+		jQuery("#modal_empty").fadeOut(400);
+	});
+	
+	//BOTON PARA MOSTAR EL DIALOGO DE AYUDA
+	jQuery("#button_help").click(function()
+	{			
+		jQuery("#modal_help").fadeIn(400);
+	});
+	
+	//BOTON PARA OCULTAR EL DIALOGO DE AYUDA
+	jQuery("#hide_help").click(function()
+	{	
+		jQuery("#modal_help").fadeOut(400);
+	});
+		
 		
 	// FUNCION PARA MOSTRAR LOS MENSAJES EN LA PAGINA DEL PLUGIN
 	function view_messages(msg)
@@ -176,13 +192,11 @@
 					 
 				request.done(function( msg ) 
 				{	
-					elemento.parent().find(".page_code_id").empty();
-					elemento.parent().find(".page_code_id").append(msg);
+					elemento.parent().parent().find(".page_code_id").empty();
+					elemento.parent().parent().find(".page_code_id").append(msg);
 				});
 			});
-			
 		});
-		
 	}
 	
 	load_accordions();
