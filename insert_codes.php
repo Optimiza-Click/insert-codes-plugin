@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 3.2
+Version: 3.3
 Plugin URI: http://www.optimizaclick.com/
 */
 
@@ -15,7 +15,9 @@ define("insert_codes_plugin_name", "insert-codes-plugin-master");
 function codes_admin_menu() 
 {	
 	//SE AÑADE UNA OPCION EN LA BARRA DE ADMINISTRACION
-	add_menu_page ( 'Insert Codes', 'Insert Codes', 'read',  'insert-codes', 'codes_form', "dashicons-editor-code", 80);
+	$menu = add_menu_page ( 'Insert Codes', 'Insert Codes', 'read',  'insert-codes', 'codes_form', "dashicons-editor-code", 80);
+	
+	add_action( 'admin_print_scripts-' . $menu, 'custom_codes_admin_styles' );
 }
 
 //ACCION INICIAL PARA AÑADIR LA OPCION DEL PLUGIN EN EL MENU DE HERRAMIENTAS
@@ -234,8 +236,6 @@ function codes_form()
 
 }   
 
-//ACCION PARA CARGAR ESTILOS EN LA ADMINISTRACION
-add_action('admin_enqueue_scripts', "custom_codes_admin_styles");
 
 //FUNCION PARA CARGAR ESTILOS EN EL ADMINISTRADOR
 function custom_codes_admin_styles() 
