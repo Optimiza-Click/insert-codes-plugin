@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 3.3
+Version: 3.6
 Plugin URI: http://www.optimizaclick.com/
 */
 
