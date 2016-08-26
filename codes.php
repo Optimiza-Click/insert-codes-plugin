@@ -22,6 +22,7 @@ if(isset($_REQUEST["post_type"]))
      require_once '../../../wp-includes/post.php';
  
 	$args = array(
+		'posts_per_page'   => -1,
 		'sort_order' => 'asc',
 		'sort_column' => 'post_title',
 		'post_type' => $_REQUEST["post_type"],

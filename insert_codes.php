@@ -5,7 +5,7 @@ Description: Plugin para añadir códigos extra al contenido de la web.
 Author: Departamento de Desarrollo - Optimizaclick
 Author URI: http://www.optimizaclick.com/
 Text Domain: Insert Codes Plugin
-Version: 3.6
+Version: 3.7
 Plugin URI: http://www.optimizaclick.com/
 */
 
@@ -18,6 +18,7 @@ function codes_admin_menu()
 	$menu = add_menu_page ( 'Insert Codes', 'Insert Codes', 'read',  'insert-codes', 'codes_form', "dashicons-editor-code", 80);
 	
 	add_action( 'admin_print_scripts-' . $menu, 'custom_codes_admin_styles' );
+	
 }
 
 //ACCION INICIAL PARA AÑADIR LA OPCION DEL PLUGIN EN EL MENU DE HERRAMIENTAS
@@ -111,7 +112,7 @@ function codes_form()
 			foreach($values as $code)
 			{
 				?>
-				<div class="accordion_full num_<?php echo $key; ?>">
+				<div class="accordion_full num">
 					<div class="accordion"><i class="dashicons dashicons-menu"></i> <span class="code_name"><?php echo $code[3]; ?></span></div>
 					
 						<div class="panel">
