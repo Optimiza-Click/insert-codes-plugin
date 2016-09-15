@@ -5,8 +5,8 @@ Este plugin permite insertar tantos códigos como sea necesario en Wordpress. Po
 Se pueden insertar los siguientes tipos de código:
 
 - HTML.
-- CSS (introduciendo los estilos entre las etiquetas <style>...</style>).
-- Javascript (<script>...</script>).
+- CSS (introduciendo los estilos entre las etiquetas "style".
+- Javascript (introduciendo los estilos entre las etiquetas "script").
 - Google Analytics.
 - Códigos de conversión.
 - Pixels de Facebook...
