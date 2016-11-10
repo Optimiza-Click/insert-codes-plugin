@@ -150,6 +150,7 @@ function codes_form()
 									
 									$args = array(
 										'sort_order' => 'asc',
+										'posts_per_page'   => -1,
 										'sort_column' => 'post_title',
 										'post_type' => $code[4],
 										'post_status' => 'publish'
